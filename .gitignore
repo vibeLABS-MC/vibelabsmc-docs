@@ -20,3 +20,8 @@ pnpm-debug.log*
 .idea/
 .vscode/*
 !.vscode/extensions.json
+
+# Coverage and ub-mode tool output
+coverage/
+.metrics/
+target/
