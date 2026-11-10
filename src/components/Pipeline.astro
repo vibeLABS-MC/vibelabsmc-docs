@@ -1,0 +1,171 @@
+---
+/**
+ * Pipeline — the passes of a frame, in the order they run.
+ *
+ *   <Pipeline passes={["shadow", "gbuffers-opaque", "final"]} />
+ *
+ * Pass names and their captions live in src/lib/pipeline.ts. A misspelt name
+ * fails the build with the list of valid ones.
+ */
+import { resolvePasses } from "@/lib/pipeline";
+
+interface Props {
+  passes: string[];
+}
+
+const passes = resolvePasses(Astro.props.passes);
+---
+
+<figure class="pipeline not-prose" aria-label="Frame pipeline">
+  <ol class="passes">
+    {
+      passes.map((pass, i) => (
+        <li class="pass" data-kind={pass.kind}>
+          <span class="step" aria-hidden="true">{i + 1}</span>
+          <code class="program">{pass.program}</code>
+          <span class="text">
+            <span class="title">{pass.title}</span>
+            <span class="caption">{pass.caption}</span>
+          </span>
+        </li>
+      ))
+    }
+  </ol>
+  <figcaption class="legend">
+    <span data-kind="geometry">Geometry pass: draws the world</span>
+    <span data-kind="fullscreen">Fullscreen pass: runs once per pixel</span>
+  </figcaption>
+</figure>
+
+<style>
+  .pipeline {
+    margin: 1.75rem 0;
+    border: 1px solid var(--nb-border);
+    border-radius: var(--nb-radius);
+    background: var(--nb-card);
+    padding: 1rem 1.25rem 0.875rem;
+  }
+
+  .passes {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .pass {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.5rem 7.5rem 1fr;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.4375rem 0;
+  }
+
+  /* The rail that joins one step to the next. */
+  .pass + .pass::before {
+    content: "";
+    position: absolute;
+    top: -0.6875rem;
+    left: calc(0.75rem - 0.5px);
+    height: 1.375rem;
+    border-left: 1px solid var(--nb-border-strong);
+  }
+
+  .step {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 999px;
+    border: 1px solid var(--nb-border-strong);
+    background: var(--nb-card);
+    color: var(--nb-muted-foreground);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .program {
+    justify-self: start;
+    border-radius: var(--nb-radius-sm);
+    padding: 0.125rem 0.5rem;
+    font-family: var(--nb-font-mono);
+    font-size: 0.8125rem;
+    line-height: 1.375rem;
+    border: 1px solid var(--nb-border);
+    background: var(--nb-muted);
+    color: var(--nb-foreground);
+  }
+
+  .pass[data-kind="geometry"] .program {
+    border-color: color-mix(in oklch, var(--nb-brand) 30%, transparent);
+    background: var(--nb-brand-wash);
+    color: var(--nb-brand);
+  }
+
+  .text {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    column-gap: 0.5rem;
+    min-width: 0;
+  }
+
+  .title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--nb-foreground);
+  }
+
+  .caption {
+    font-size: 0.8125rem;
+    color: var(--nb-muted-foreground);
+  }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem 1.25rem;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--nb-border);
+    font-size: 0.75rem;
+    color: var(--nb-muted-foreground);
+  }
+
+  .legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+  }
+
+  .legend span::before {
+    content: "";
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: 0.1875rem;
+    border: 1px solid var(--nb-border-strong);
+    background: var(--nb-muted);
+  }
+
+  .legend [data-kind="geometry"]::before {
+    border-color: color-mix(in oklch, var(--nb-brand) 40%, transparent);
+    background: color-mix(in oklch, var(--nb-brand) 18%, transparent);
+  }
+
+  @media (max-width: 30rem) {
+    .pass {
+      grid-template-columns: 1.5rem 1fr;
+      row-gap: 0.25rem;
+    }
+    .text {
+      grid-column: 2;
+    }
+    .pass + .pass::before {
+      height: 100%;
+      top: -50%;
+    }
+  }
+</style>

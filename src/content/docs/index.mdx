@@ -1,0 +1,55 @@
+---
+title: Learn how Minecraft shaders work
+description: Install a shaderpack, fix what breaks, or write your own from the first line of GLSL. Clear guides and an honest reference for Iris and OptiFine, free for everyone.
+sidebar:
+  label: Introduction
+  order: 0
+lastUpdated: 2026-11-10
+---
+
+These docs are written by the vibeLABS community for two kinds of reader: players who want a shaderpack running smoothly, and developers who want to write their own. Each page says under its title whether it applies to Iris, OptiFine or both.
+
+## Choose a path
+
+<CardGrid>
+  <Card title="Play with shaders" icon="ph:game-controller" href="/using/install-iris/">
+    Get a shaderpack running on Iris or OptiFine, and keep it fast.
+  </Card>
+  <Card title="Make shaders" icon="ph:code" href="/developing/getting-started/">
+    Write your first shaderpack, step by step, from an empty folder.
+  </Card>
+  <Card title="Reference" icon="ph:books" href="/reference/programs/">
+    Programs, uniforms, block IDs and the terms these docs use.
+  </Card>
+  <Card title="Standards" icon="ph:stack" href="/standards/labpbr/">
+    LabPBR, the material format many resource packs and shaderpacks share.
+  </Card>
+</CardGrid>
+
+## New to shaders?
+
+<Steps>
+  <Step title="Install a shader loader">
+    Follow [Install Iris](/using/install-iris/) or [Install OptiFine](/using/install-optifine/). Minecraft cannot load shaderpacks without one.
+  </Step>
+  <Step title="Pick a shaderpack">
+    [Choosing a shaderpack](/using/choosing-a-shaderpack/) covers style, performance cost and where to download packs safely.
+  </Step>
+  <Step title="Make it run well">
+    [Performance](/using/performance/) shows which settings cost the most frames. If something looks wrong, start with [Troubleshooting](/using/troubleshooting/).
+  </Step>
+</Steps>
+
+## Looking something up?
+
+- [`gbuffers_water`](/reference/programs/) and every other program a pack can contain
+- [`RENDERTARGETS`](/developing/rendering-pipeline/#writing-to-render-targets), and which pass writes where
+- [`frameTimeCounter`](/reference/uniforms/) and the uniforms most packs read
+- [`block.properties`](/reference/block-ids/), for giving blocks their own IDs
+- [LabPBR](/standards/labpbr/) channels in the `_n` and `_s` textures
+
+Press <kbd>Ctrl</kbd> <kbd>K</kbd> to search every page.
+
+## Help improve these docs
+
+Every page has an edit link that opens its source on [GitHub](https://github.com/vibeLABS-MC/vibelabsmc-docs). Corrections, clearer wording and new pages are all welcome.
