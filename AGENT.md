@@ -10,8 +10,9 @@ separate repo, `vibeLABS-MC/vibelabsmc-website`.
 
 - **Bun is the package manager.** Use `bun install`, `bun add`, `bun run <script>`, `bunx`; never
   npm, pnpm or yarn, and commit `bun.lock`. Astro itself runs on Node 22.12+.
-- **Before you push:** `bun test`, `bun run typecheck`, `bun run lint:docs`, `bun run build`, then
-  `bun run check`. CI runs the same list and blocks the deploy if any step fails.
+- **Before you push:** `bun test`, `bun run typecheck`, `bun run build`, then `bun run lint:docs`
+  and `bun run check` (both read the route list the build writes). CI runs the same list and
+  blocks the deploy if any step fails.
 - **Facts must be right for current Iris and OptiFine.** Check them against primary sources:
   [shaders.properties](https://shaders.properties), OptiFine's
   [shaders.txt](https://github.com/sp614x/optifine/blob/master/OptiFineDoc/doc/shaders.txt), the

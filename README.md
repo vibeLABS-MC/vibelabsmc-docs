@@ -21,7 +21,7 @@ bun run dev          # http://localhost:4321
 | --------------------- | -------------------------------------------------------------------- |
 | `bun test`            | Unit tests for the logic in `src/lib/`                               |
 | `bun run typecheck`   | `astro check`: types in every `.astro` and `.ts` file                |
-| `bun run lint:docs`   | Nimbus authoring rules: frontmatter shape and internal links         |
+| `bun run lint:docs`   | Nimbus authoring rules: frontmatter and internal links (after build) |
 | `bun run build`       | Static site in `dist/`, with the Pagefind search index               |
 | `bun run check`       | Nimbus preflight; run it after a build so it can check links as well |
 | `bun run preview`     | Serve `dist/` locally                                                |

@@ -30,11 +30,12 @@ jobs:
         run: bun test
       - name: Type-check
         run: bun run typecheck
-      - name: Lint the docs
-        run: bun run lint:docs
       - name: Build (fails on bad frontmatter, unknown components or pipeline passes)
         run: bun run build
-      - name: Nimbus preflight, with link checking now that the site is built
+      # Both need the route list (.nimbus/routes.json) that the build writes.
+      - name: Lint the docs, including internal links
+        run: bun run lint:docs
+      - name: Nimbus preflight
         run: bun run check
       - if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         uses: actions/configure-pages@v6
