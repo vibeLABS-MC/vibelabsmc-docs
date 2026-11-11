@@ -5,6 +5,7 @@ import Icon from "@cloudflare/nimbus-docs/components/Icon.astro";
 import { Button } from "./ui/button";
 import { LinkButton } from "./ui/link-button";
 import { ThemeToggle } from "./ui/theme-toggle";
+import AccountMenu from "./account/AccountMenu.astro";
 import SearchTrigger from "./ui/search/SearchTrigger.astro";
 import { config } from "virtual:nimbus/config";
 import { getCollectionUrl, getSidebarSections, stripBase, withBase } from "@cloudflare/nimbus-docs/runtime";
@@ -109,6 +110,7 @@ const resolveSectionHref = (href: string): string =>
         </LinkButton>
       )}
       <ThemeToggle />
+      <AccountMenu />
       {showSidebar && (
         <Button
           variant="ghost"

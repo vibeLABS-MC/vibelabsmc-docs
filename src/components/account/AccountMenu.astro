@@ -1,0 +1,64 @@
+---
+/**
+ * The vibeLABS account in the docs header: "Sign in" for visitors, the avatar and a menu for
+ * people signed in on the main site. The page is static, so a small script asks the account
+ * site who is signed in (with the session cookie, which only that site can read).
+ */
+import Icon from "@cloudflare/nimbus-docs/components/Icon.astro";
+import { ACCOUNT_ORIGIN } from "@/lib/site";
+---
+
+<div data-nb-account data-origin={ACCOUNT_ORIGIN} class="relative flex items-center">
+  <a
+    data-account-signin
+    href={`${ACCOUNT_ORIGIN}/login`}
+    class="inline-flex items-center gap-1.5 h-8 px-3 rounded-md text-[0.8125rem] font-medium text-muted-foreground hover:text-foreground hover:bg-accent no-underline transition-colors"
+  >
+    <Icon name="ph:user-circle" class="w-4 h-4" />
+    <span class="hidden sm:inline">Sign in</span>
+  </a>
+
+  <button
+    data-account-button
+    type="button"
+    popovertarget="nb-account-menu"
+    aria-label="Your vibeLABS account"
+    hidden
+    class="flex items-center justify-center w-8 h-8 rounded-full overflow-hidden bg-primary text-primary-foreground text-xs font-semibold ring-1 ring-border hover:ring-2 hover:ring-primary/40 transition"
+  >
+    <img data-account-avatar alt="" width="32" height="32" class="w-full h-full object-cover" hidden />
+    <span data-account-initials></span>
+  </button>
+
+  <div
+    id="nb-account-menu"
+    popover
+    data-account-menu
+    class="fixed m-0 w-60 rounded-xl border border-border bg-card p-1 text-sm text-foreground shadow-lg [inset:3.5rem_1rem_auto_auto]"
+  >
+    <div class="px-3 py-2.5 border-b border-border mb-1">
+      <p data-account-name class="font-semibold truncate"></p>
+      <p data-account-handle class="text-muted-foreground truncate"></p>
+    </div>
+    <a data-account-link="profile" class="flex items-center gap-2 px-3 py-2 rounded-md no-underline text-foreground hover:bg-accent">
+      <Icon name="ph:user" class="w-4 h-4 text-muted-foreground" />Your profile
+    </a>
+    <a data-account-link="dashboard" href={`${ACCOUNT_ORIGIN}/dashboard`} class="flex items-center gap-2 px-3 py-2 rounded-md no-underline text-foreground hover:bg-accent">
+      <Icon name="ph:squares-four" class="w-4 h-4 text-muted-foreground" />Dashboard
+    </a>
+    <a data-account-link="marketplace" href={`${ACCOUNT_ORIGIN}/marketplace`} class="flex items-center gap-2 px-3 py-2 rounded-md no-underline text-foreground hover:bg-accent">
+      <Icon name="ph:storefront" class="w-4 h-4 text-muted-foreground" />Marketplace
+    </a>
+    <a data-account-link="settings" href={`${ACCOUNT_ORIGIN}/settings`} class="flex items-center gap-2 px-3 py-2 rounded-md no-underline text-foreground hover:bg-accent">
+      <Icon name="ph:gear" class="w-4 h-4 text-muted-foreground" />Settings
+    </a>
+    <div class="h-px bg-border my-1"></div>
+    <a data-account-signout class="flex items-center gap-2 px-3 py-2 rounded-md no-underline text-foreground hover:bg-accent">
+      <Icon name="ph:sign-out" class="w-4 h-4 text-muted-foreground" />Sign out
+    </a>
+  </div>
+</div>
+
+<script>
+  import "./account.client";
+</script>
